@@ -188,11 +188,11 @@ addRoute('PATCH', '/products/(\d+)', function ($id) {
 });
 
 addRoute('DELETE', '/products/(\d+)', function ($id) {
-    $newID = str_split($id, 10);
-    $product = Product::Find($newID[1]);
+    $pID = explode('/', $id);
+    $pdt = Product::Find($pID[2]);
 
-    if ($product) {
-        if ($product->Delete()) {
+    if ($pdt) {
+        if ($pdt->Delete()) {
             header("Location: /products/(\d+)");
             header('Content-Type: application/vnd.api+json');
             http_response_code(204);
